@@ -1,11 +1,14 @@
 package com.aquilesdev.WebService.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity(name="tb_user")
 public class User implements Serializable{
@@ -21,6 +24,14 @@ public class User implements Serializable{
 	private String phone;	
 	private String password;
 	
+	@OneToMany(mappedBy="client")
+	private List<Order> orders = new ArrayList<>();
+	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public User(){}
 
 	public User(Long id, String name, String email, String phone, String password) {
@@ -69,6 +80,10 @@ public class User implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 	@Override
