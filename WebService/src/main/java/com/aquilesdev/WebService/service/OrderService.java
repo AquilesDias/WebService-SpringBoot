@@ -13,14 +13,14 @@ import com.aquilesdev.WebService.repository.OrderRepository;
 public class OrderService {
 
 	@Autowired
-	private OrderRepository userRepository;
+	private OrderRepository orderRepository;
 	
 	public List<Order> findAll(){
-		return userRepository.findAll();
+		return orderRepository.findAll();
 	}
 	
 	public Order findById(Long id) {
-	  Optional<Order> obj = userRepository.findById(id);
+	  Optional<Order> obj = orderRepository.findById(id);
 	  return obj.get();
 	}
 }
