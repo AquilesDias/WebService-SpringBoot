@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="tb_category")
 public class Category implements Serializable{
@@ -17,11 +19,12 @@ public class Category implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Long id;
 	private String name;
 	
-//	@OneToMany
-	@Transient
+	@JsonIgnore
+    @ManyToMany(mappedBy="categories")
 	private Set<Product> products = new HashSet<>();
 	
 	public Category() {}
@@ -40,18 +43,11 @@ public class Category implements Serializable{
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}	
 	
 	public Set<Product> getProducts() {
 		return products;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
